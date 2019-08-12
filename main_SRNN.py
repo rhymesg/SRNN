@@ -3,7 +3,7 @@
 # author: Youngjoo Kim (16 Jan 2019)
 # Youngjoo Kim, Peng Wang, Lyudmila Mihaylova, "Scalable Learning with a 
 # Structural Recurrent Neural Network for Short-Term Traffic Prediction", \
-# Submitted to IEEE Sensors Journal, Jan 2019
+# IEEE Sensors Journal, Aug 2019
 
 # main script
 
