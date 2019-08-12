@@ -1,7 +1,7 @@
 # SRNN
 Pytorch implementation of structural recurrent neural network (SRNN) for traffic speed prediction.
 
-Built with Pytorch with Python 3.5
+Built with Python 3.5
 
 Please cite the following paper if you find this code helpful:
 
