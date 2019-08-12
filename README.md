@@ -3,6 +3,10 @@ Pytorch implementation of structural recurrent neural network (SRNN) for traffic
 
 Built with Python 3.5
 
+- Scalable learning of the interaction between adjacent road segments and the temporal dynamics
+- Outperforms the image-based approaches using the CapsNet and CNN
+- Able to predict traffic speed of road networks different from the network used to train
+
 Please cite the following paper if you find this code helpful:
 
 Youngjoo Kim, Peng Wang, and Lyudmila Mihaylova, "Scalable Learning with a Structural Recurrent
