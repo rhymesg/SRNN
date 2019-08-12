@@ -5,7 +5,7 @@ Built with Python 3.5
 
 - Scalable learning of the interaction between adjacent road segments and the temporal dynamics
 - Able to predict traffic speed of road networks different from the network used to train
-- Outperforms the image-based approaches using the CapsNet and CNN, requiring the fewer, constant number of parameters to train
+- Outperforms the image-based approaches using the CapsNet and CNN, requiring the smaller, constant number of parameters to train
 
 Please cite the following paper if you find this code helpful:
 
