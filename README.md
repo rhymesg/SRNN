@@ -10,7 +10,7 @@ Built with Python 3.5
 Please cite the following paper if you find this code helpful:
 
 Youngjoo Kim, Peng Wang, and Lyudmila Mihaylova, "Scalable Learning with a Structural Recurrent
-Neural Network for Short-Term Traffic Prediction", IEEE Sensors Journal (Online Published), Aug 2019. Available: https://www.researchgate.net/publication/335076235_Scalable_Learning_with_a_Structural_Recurrent_Neural_Network_for_Short-Term_Traffic_Prediction
+Neural Network for Short-Term Traffic Prediction", IEEE Sensors Journal, vol. 19, issue. 23, pp. 11359-11366, 2019. Available: https://www.researchgate.net/publication/335076235_Scalable_Learning_with_a_Structural_Recurrent_Neural_Network_for_Short-Term_Traffic_Prediction
 
 Preliminary work:
 
