@@ -1,0 +1,49 @@
+cff-version: 1.2.0
+message: "Please cite the journal paper in preferred-citation when using this method."
+type: software
+title: "SRNN: Structural recurrent neural network for traffic speed prediction"
+authors:
+  - family-names: Kim
+    given-names: Youngjoo
+repository-code: "https://github.com/rhymesg/SRNN"
+url: "https://github.com/rhymesg/SRNN"
+license: MIT
+keywords:
+  - structural recurrent neural network
+  - traffic speed prediction
+  - spatio-temporal graph
+  - time series forecasting
+  - LSTM
+  - PyTorch
+preferred-citation:
+  type: article
+  title: "Scalable Learning With a Structural Recurrent Neural Network for Short-Term Traffic Prediction"
+  authors:
+    - family-names: Kim
+      given-names: Youngjoo
+    - family-names: Wang
+      given-names: Peng
+    - family-names: Mihaylova
+      given-names: Lyudmila
+  journal: "IEEE Sensors Journal"
+  year: 2019
+  volume: 19
+  issue: 23
+  start: 11359
+  end: 11366
+  doi: "10.1109/JSEN.2019.2933823"
+  url: "https://doi.org/10.1109/JSEN.2019.2933823"
+references:
+  - type: conference-paper
+    title: "Structural Recurrent Neural Network for Traffic Speed Prediction"
+    authors:
+      - family-names: Kim
+        given-names: Youngjoo
+      - family-names: Wang
+        given-names: Peng
+      - family-names: Mihaylova
+        given-names: Lyudmila
+    collection-title: "2019 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)"
+    year: 2019
+    doi: "10.1109/ICASSP.2019.8683670"
+    url: "https://doi.org/10.1109/ICASSP.2019.8683670"

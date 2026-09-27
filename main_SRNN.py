@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# SRNN traffic prediction experiments; https://doi.org/10.1109/JSEN.2019.2933823
+# Reference: docs/structural-rnn.md; citation: README.md#citation.
 
 # author: Youngjoo Kim (16 Jan 2019)
 # Youngjoo Kim, Peng Wang, Lyudmila Mihaylova, "Scalable Learning with a 

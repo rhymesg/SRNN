@@ -1,3 +1,5 @@
+# SRNN node/edge LSTMs; https://doi.org/10.1109/JSEN.2019.2933823
+# Reference: docs/structural-rnn.md; citation: README.md#citation.
 
 # author: Youngjoo Kim
 
@@ -149,9 +151,9 @@ class SRNN(nn.Module):
         '''
         Forward pass for the SRNN
         [params]
-        data_nodes : input node features (seq_length_p1 x numNodes x 1)
-        data_temporalEdges : input temporal edge features (seq_length_p1 x numTemporalEdges x 2)
-        data_spatialEdges : input temporal edge features (seq_length_p1 x numSpatialEdges x 2)
+        data_nodes : input node features (seq_length x numNodes x 1)
+        data_temporalEdges : input temporal edge features (seq_length x numTemporalEdges x 2)
+        data_spatialEdges : input spatial edge features (seq_length x numSpatialEdges x 2)
         h's and c's : hidden states and cell states for corresponding RNNs
 
         [returns]
