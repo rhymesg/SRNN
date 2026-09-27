@@ -7,7 +7,7 @@ Guide to the existing [training script](../main_SRNN.py) and [synthetic example]
 - `main()` currently calls `Run_SRNN_NormalCase(args, no_dataset=1)`; dataset selection is not a CLI option.
 - `Run_SRNN_Different_Dataset(args, train_id, eval_id)` trains on one graph and evaluates on another after replacing the graph and resetting sequence states.
 - `Run_SRNN_Scalability(args)` calls that function for all pairs of datasets 1–4 and overrides the epoch count and data limit.
-- Alternative experiment calls in `main()` are commented out; edit the selected call only after reviewing [training limitations](limitations.md#training-and-evaluation-limitations).
+- Alternative experiment calls in `main()` are commented out; edit the selected call only after reviewing [training procedure](implementation-notes.md#training-and-evaluation).
 - `Run_SRNN_test_parameters` references dataset 5, which is absent; it is not a runnable supplied experiment.
 
 List parser options from the repository root:
@@ -53,6 +53,6 @@ The README's short run uses sizes that provide nonempty training and evaluation 
 - The training script does not set seeds; initialization and training dropout remain random, so numerical logs vary between runs.
 - The synthetic example sets a seed and disables dropout for its untrained forward check; its shape/finite checks do not require exact floating-point predictions.
 
-The script produces console output, checkpoints, and CSV logs, but no plots or standalone prediction export. See [verification status](limitations.md#verification-status) for what has actually been executed.
+The script produces console output, checkpoints, and CSV logs. See [checks](implementation-notes.md#checks) for what has actually been executed.
 
 [Training regression checks](../tests/integration/training/README.md) exercise exact full batches, two epochs, and evaluation mode using temporary synthetic data.

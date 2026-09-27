@@ -27,10 +27,10 @@ All CSV files are numeric and have no header; data columns and adjacency rows/co
 - Supply enough observations for nonempty train and evaluation batches and the stricter [batch-boundary assertion](../../docs/running.md#sequence-boundaries-and-data-requirements).
 - Use compatible speed units: [DataLoader](../../dataLoader.py) applies fixed bounds `0` and `150`, without clipping or deriving a min/max from the data.
 
-## Preprocessing and provenance limits
+## Preprocessing and provenance
 
 The paper reports SETA project measurements from 2016 and describes filling missing values using other days' values at the same time. The supplied loader performs no such imputation, and the repository contains no raw-data conversion script or timestamp map.
 
 The journal describes 35,040 readings per segment, whereas each bundled data file has 33,504 rows. Do not assume exact calendar coverage or a first-nine-months split from these files; the default loader uses a row-count split of 25,128 training and 8,376 evaluation observations.
 
-The repository's [MIT license](../../LICENSE) is present, but no separate dataset source license or collection/redistribution record is supplied. Dataset-specific rights and the ID-row meanings remain unverified; the [synthetic example](../../example_synthetic.py) does not require these files.
+The [MIT license](../../LICENSE) covers the repository's software. Confirm dataset redistribution terms with the data rights holder; the [synthetic example](../../example_synthetic.py) generates its own inputs.

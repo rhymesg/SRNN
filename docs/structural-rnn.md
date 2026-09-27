@@ -49,10 +49,10 @@ Fixed embedding and hidden-state widths keep the trainable parameter count indep
 - [main_SRNN.forward](../main_SRNN.py) accepts the `L+1` feature arrays, creates zero states per sequence, uses the first `L` steps as inputs, and computes MSE only between the final output and the held-out final observation.
 - Outputs are unconstrained scaled values; [MinMaxScaler.scale_inverse](../MinMaxScaler.py) converts them back to speed units without clipping.
 
-## Assumptions and implementation boundaries
+## Graph and execution model
 
-The shared architecture treats road segments as semantically equivalent and uses a fixed supplied graph. There is no attention layer, learned adjacency, missing-data mask, multistep autoregressive rollout, or implemented GPU device path.
+The shared architecture treats road segments as semantically equivalent and uses a fixed supplied graph with CPU tensors.
 
 The journal uses directed links; the ICASSP version introduced two opposing edges per connection. `readGraph` follows the supplied matrix and does not add reverse links automatically.
 
-Run the [synthetic example](../example_synthetic.py) via the [README command](../README.md#examples) to inspect the feature and output shapes. Consult [limitations](limitations.md) before using training logs as research evidence.
+Run the [synthetic example](../example_synthetic.py) via the [README command](../README.md#examples) to inspect the feature and output shapes. Consult [implementation details](implementation-notes.md) before using training logs as research evidence.

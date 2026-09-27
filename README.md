@@ -4,7 +4,7 @@
 
 PyTorch structural recurrent neural network (SRNN) for short-term traffic speed prediction from historical speed measurements and a road-network adjacency matrix.
 
-This is Youngjoo Kim's research code accompanying the 2019 IEEE Sensors Journal paper **“Scalable Learning With a Structural Recurrent Neural Network for Short-Term Traffic Prediction”**, following the preliminary ICASSP paper. See the [canonical repository](https://github.com/rhymesg/SRNN), [citations and full texts](#citation), and [provenance](docs/limitations.md#provenance).
+This is Youngjoo Kim's research code accompanying the 2019 IEEE Sensors Journal paper **“Scalable Learning With a Structural Recurrent Neural Network for Short-Term Traffic Prediction”**, following the preliminary ICASSP paper. See the [canonical repository](https://github.com/rhymesg/SRNN), [citations and full texts](#citation), and [provenance](docs/implementation-notes.md#provenance).
 
 The model combines shared node LSTMs, spatial-edge LSTMs, and temporal-edge LSTMs for graph-based time-series forecasting. Shared weights and summed edge states allow the same model parameters to operate on different road graphs; runtime and state memory still depend on graph size.
 
@@ -60,7 +60,7 @@ Install the dependencies used by the source:
 python -m pip install torch numpy pandas
 ```
 
-See the [checked CPU environment](docs/limitations.md#verification-status) for a concrete dependency reference.
+See the [checked CPU environment](docs/implementation-notes.md#checks) for a concrete dependency reference.
 
 Run the synthetic forward example without using the Santander data or writing model files:
 
@@ -80,7 +80,7 @@ This writes or overwrites `save/dataset_1/srnn_model_epoch1.tar` and `log/_loss_
 
 ## Implementation scope
 
-The source includes graph construction, shared LSTM modules, training, and evaluation. Synthetic forward and training checks exercise those paths; [implementation notes](docs/limitations.md) describe optimizer, data, and metric conventions.
+The source includes graph construction, shared LSTM modules, training, and evaluation. Synthetic forward and training checks exercise those paths; [implementation notes](docs/implementation-notes.md) describe optimizer, data, and metric conventions.
 
 ### Checks
 
@@ -91,6 +91,8 @@ PYTHONPATH=. python tests/integration/training/verify_training.py
 ```
 
 ## Citation
+
+For academic attribution, please acknowledge this repository when adapting its code or examples.
 
 Please cite the journal paper when using this method:
 
@@ -104,4 +106,4 @@ The preliminary work describes the earlier architecture and experiments:
 
 ## License and provenance
 
-The repository includes an [MIT license](LICENSE). See [provenance and implementation notes](docs/limitations.md) for implementation scope and the [dataset guide](dataset/Santander/README.md) for data-source and processing details.
+The repository includes an [MIT license](LICENSE). See [provenance and implementation notes](docs/implementation-notes.md) for implementation scope and the [dataset guide](dataset/Santander/README.md) for data-source and processing details.
