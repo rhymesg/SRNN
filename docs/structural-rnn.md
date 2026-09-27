@@ -55,4 +55,4 @@ The shared architecture treats road segments as semantically equivalent and uses
 
 The journal uses directed links; the ICASSP version introduced two opposing edges per connection. `readGraph` follows the supplied matrix and does not add reverse links automatically.
 
-Run the [synthetic example](../example_synthetic.py) via the [README command](../README.md#usage) to inspect the feature and output shapes. Consult [limitations](limitations.md) before using training logs as research evidence.
+Run the [synthetic example](../example_synthetic.py) via the [README command](../README.md#examples) to inspect the feature and output shapes. Consult [limitations](limitations.md) before using training logs as research evidence.

@@ -8,9 +8,25 @@ This is Youngjoo Kim's research code accompanying the 2019 IEEE Sensors Journal 
 
 The model combines shared node LSTMs, spatial-edge LSTMs, and temporal-edge LSTMs for graph-based time-series forecasting. Shared weights and summed edge states allow the same model parameters to operate on different road graphs; runtime and state memory still depend on graph size.
 
-Use this repository to study the architecture or adapt its graph and feature construction. The supplied scripts have [known limitations and differences from the papers](docs/limitations.md); their output is not a verified reproduction of the published accuracy comparisons.
+Use this repository to study shared graph-recurrent architecture or adapt its graph and feature construction.
 
-## Installation
+## Method
+
+Represent roads as graph nodes and their spatial and temporal relationships as edges. Shared edge LSTMs encode those relationships; each node LSTM combines the incident-edge states with its own history to predict future speed.
+
+### Algorithms and source
+
+The [structural RNN reference](docs/structural-rnn.md) explains the equations, tensor contract, and implementation choices.
+
+| Capability | Journal paper | Source or example |
+|---|---|---|
+| Graph and node/edge features | Sections III-A–B | [st_graph.py](st_graph.py), [dataset guide](dataset/Santander/README.md) |
+| Shared spatial and temporal LSTMs | Eqs. (1)–(4) | `EdgeRNN` in [model.py](model.py) |
+| Incident-edge aggregation and node prediction | Eqs. (5)–(11) | `SRNN.forward`, `NodeRNN` in [model.py](model.py), [synthetic example](example_synthetic.py) |
+| Scaling, split, sequence batching | Section IV-A | [dataLoader.py](dataLoader.py), [MinMaxScaler.py](MinMaxScaler.py) |
+| Training and cross-graph evaluation | Sections III-E, IV-B–C | [main_SRNN.py](main_SRNN.py), [running guide](docs/running.md) |
+
+## Examples
 
 Clone the repository:
 
@@ -42,9 +58,7 @@ Install the dependencies used by the source:
 python -m pip install torch numpy pandas
 ```
 
-The original environment used Python 3.5; dependency versions are unspecified. See [verification status](docs/limitations.md#verification-status) for the modern CPU environment actually checked; these commands do not reconstruct the original experiment environment.
-
-## Usage
+See [verification status](docs/limitations.md#verification-status) for the checked modern CPU environment; original dependency versions were not recorded.
 
 Run the synthetic forward example without using the Santander data or writing model files:
 
@@ -62,25 +76,17 @@ python main_SRNN.py --numData_set 128 --numData_train_set 96 --batch_size 2 --nu
 
 This writes or overwrites `save/dataset_1/srnn_model_epoch1.tar` and `log/_loss_eval_dataset_1.csv`. Run from the repository root; see the [running guide](docs/running.md) before changing the data size or epoch count.
 
-## Development
+## Implementation scope
 
-Run the [exact-batch and two-epoch training regression checks](tests/integration/training/README.md) before changing the corresponding numerical routines.
+The source includes graph construction, shared LSTM modules, training, and evaluation. Synthetic forward and training checks exercise those paths; [optimizer, data, and metric differences](docs/limitations.md) matter when comparing results with the papers.
 
-Run `example_synthetic.py` and the small training command above after changes to the forward path. There is no comprehensive automated test suite or paper-reproduction harness.
+### Checks
 
-Report issues in the [issue tracker](https://github.com/rhymesg/SRNN/issues) with the commit, Python/dependency versions, command, graph/data dimensions, and traceback or unexpected output. Suggested GitHub description and topics are in [repository metadata](docs/repository-metadata.md).
+Run the [exact-batch and two-epoch training checks](tests/integration/training/README.md):
 
-## Algorithms and source
-
-The [structural RNN reference](docs/structural-rnn.md) explains the equations, tensor contract, and implementation choices.
-
-| Capability | Journal paper | Source or example |
-|---|---|---|
-| Graph and node/edge features | Sections III-A–B | [st_graph.py](st_graph.py), [dataset guide](dataset/Santander/README.md) |
-| Shared spatial and temporal LSTMs | Eqs. (1)–(4) | `EdgeRNN` in [model.py](model.py) |
-| Incident-edge aggregation and node prediction | Eqs. (5)–(11) | `SRNN.forward`, `NodeRNN` in [model.py](model.py), [synthetic example](example_synthetic.py) |
-| Scaling, split, sequence batching | Section IV-A | [dataLoader.py](dataLoader.py), [MinMaxScaler.py](MinMaxScaler.py) |
-| Training and cross-graph evaluation | Sections III-E, IV-B–C | [main_SRNN.py](main_SRNN.py), [running guide](docs/running.md) |
+```bash
+PYTHONPATH=. python tests/integration/training/verify_training.py
+```
 
 ## Citation
 

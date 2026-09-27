@@ -1,6 +1,6 @@
 # Running SRNN
 
-Guide to the existing [training script](../main_SRNN.py) and [synthetic example](../example_synthetic.py). Follow the [installation and short-run commands](../README.md#installation) first.
+Guide to the existing [training script](../main_SRNN.py) and [synthetic example](../example_synthetic.py). Follow the [installation and short-run commands](../README.md#examples) first.
 
 ## Entry points
 
