@@ -64,6 +64,8 @@ This writes or overwrites `save/dataset_1/srnn_model_epoch1.tar` and `log/_loss_
 
 ## Development
 
+Run the [exact-batch and two-epoch training regression checks](tests/integration/training/README.md) before changing the corresponding numerical routines.
+
 Run `example_synthetic.py` and the small training command above after changes to the forward path. There is no comprehensive automated test suite or paper-reproduction harness.
 
 Report issues in the [issue tracker](https://github.com/rhymesg/SRNN/issues) with the commit, Python/dependency versions, command, graph/data dimensions, and traceback or unexpected output. Suggested GitHub description and topics are in [repository metadata](docs/repository-metadata.md).

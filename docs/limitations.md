@@ -1,6 +1,6 @@
 # Provenance and reproducibility limits
 
-Evidence and boundaries for using [SRNN](../README.md) as a technical reference. The algorithm and training behavior described here match source revision [a9ccd8b2117c79106aa4dc1ffb9c21e31fdf7b11](https://github.com/rhymesg/SRNN/tree/a9ccd8b2117c79106aa4dc1ffb9c21e31fdf7b11).
+Evidence and boundaries for using [SRNN](../README.md) as a technical reference. The historical source baseline is revision [a9ccd8b2117c79106aa4dc1ffb9c21e31fdf7b11](https://github.com/rhymesg/SRNN/tree/a9ccd8b2117c79106aa4dc1ffb9c21e31fdf7b11).
 
 ## Provenance
 
@@ -26,18 +26,18 @@ The default hidden and embedding sizes match journal Table I; the ICASSP model u
 
 ## Training and evaluation limitations
 
-- `Run_SRNN_NormalCase` never resets data pointers between epochs; a second epoch fails when attempting to read beyond the training split.
+- `Run_SRNN_NormalCase` resets pointers each epoch; exact full batches are accepted.
 - `Run_SRNN_Different_Dataset` reloads data each phase, but calls `net.initialize()` after the first epoch while retaining the optimizer's accumulated state; it does not perform ordinary continuous multi-epoch training.
-- Evaluation never calls `net.eval()` or disables gradient tracking; dropout remains active, though evaluation does not backpropagate or step the optimizer.
+- Both runners now use training/evaluation modes and disable gradient tracking during evaluation forward calls.
 - `batch_size` groups sequences for reporting; gradients are cleared and the optimizer steps for each sequence, rather than one accumulated minibatch update.
 - Training and evaluation use only the last prediction in each non-overlapping `L+1`-row window; intervening outputs do not contribute directly to the loss.
-- The loader's batch count and boundary assertion disagree for some sizes; zero batches also lead to division by zero, as detailed in the [running guide](running.md#sequence-boundaries-and-data-requirements).
+- Splits containing zero complete batches lead to division by zero, as detailed in the [running guide](running.md#sequence-boundaries-and-data-requirements).
 - `--num_layer` and `--lambda_param` are unused, alongside the rate/decay settings above; no CLI seed is supplied.
 - CPU tensors are constructed internally; moving only the model to a GPU does not provide a working GPU path.
 - Isolated nodes, nonzero adjacency diagonals, missing values, and mismatched graph/data sizes are not supported robustly; see the [input contract](../dataset/Santander/README.md#input-contract).
 - Dataset 5, pretrained checkpoints, baseline CNN/CapsNet implementations, raw-data preprocessing, and scripts reproducing the publication tables are absent.
 
-These observations identify existing behavior; this documentation update does not choose replacement scientific settings or change the training protocol.
+Optimizer settings, transfer-training reinitialization, and metric aggregation remain research choices; the boundary, epoch-reset, and evaluation-mode fixes do not reconcile those choices with the papers.
 
 ## Verification status
 
@@ -46,9 +46,9 @@ Checks on 2026-09-27 used a temporary CPU environment on macOS arm64 with Python
 - Checked bundled CSV dimensions, finite speed values, binary adjacency values, zero diagonals, and absence of isolated nodes.
 - Passed the synthetic forward check and the README's small training/evaluation command, including checkpoint and CSV inspection; these are execution checks, not scientific validation.
 - The small training run reported 87,905 trainable parameters and emitted NumPy deprecation warnings at the tensor-to-array conversion in `loss_RMSE`; it completed successfully.
-- Confirmed exhausted training pointers fail on the next batch and a split of 88 rows with sequence length 10 and batch size 2 fails on its advertised final batch.
+- Regression checks cover exact-full-batch splits, pointer resets, and two-epoch normal training.
 - Checked citation metadata against the papers and institutional/arXiv records, and validated `CITATION.cff` against the CFF 1.2.0 schema.
-- Checked documentation links, Python syntax, and unchanged executable statements in the original source files; the `SRNN.forward` docstring now describes the input tensors used by the caller.
+- Checked documentation links and Python syntax; the `SRNN.forward` docstring now describes the input tensors used by the caller.
 - Full-dataset training, published RMSE comparisons, cross-network accuracy, and GPU execution have not been reproduced.
 
 For reproducible future experiments, record the exact commit, dependency versions, graph/data files, split, all effective settings, random seeds, and evaluation aggregation method. Resolve the discrepancies above before comparing new measurements with published tables.

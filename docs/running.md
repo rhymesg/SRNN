@@ -27,9 +27,9 @@ python main_SRNN.py --help
 | `--batch_size` | Number of sequences grouped for iteration/logging; optimizer steps still occur per sequence |
 | `--node_rnn_size`, `--edge_rnn_size` | Hidden/cell widths |
 | `--node_embedding_size`, `--edge_embedding_size` | Feature/context embedding widths |
-| `--dropout` | Embedding dropout probability, also active during the original evaluation loop |
+| `--dropout` | Embedding dropout probability during training; disabled in evaluation |
 | `--grad_clip` | Gradient norm threshold before each optimizer step |
-| `--num_epochs` | Requested epochs; normal-case pointers are not reset between epochs |
+| `--num_epochs` | Requested epochs; normal-case pointers reset each epoch |
 
 `--learning_rate`, `--decay_rate`, `--lambda_param`, and `--num_layer` are parsed but not applied by the active training functions/model. Both training functions instantiate `Adagrad(net.parameters())` with library defaults; check [Adagrad documentation](https://docs.pytorch.org/docs/stable/generated/torch.optim.Adagrad.html) for the installed version.
 
@@ -39,9 +39,9 @@ Keep node input/output dimensions at `1` and edge input dimensions at `2` for th
 
 [DataLoader](../dataLoader.py) scales speed by `150`, splits in CSV row order, and creates non-overlapping sequences of `L+1` rows. For split size `S` and batch size `B`, it advertises `floor(floor(S/(L+1))/B)` batches and drops the remaining rows.
 
-The batch readers additionally assert `idx + L + 2 < S`. This is stricter than the advertised batch count: some otherwise valid sizes fail on their last batch, and splits with zero batches cause division by zero in training/evaluation.
+The batch readers accept a sequence ending exactly at the split boundary. Each split must contain at least one full batch; splits with zero batches still cause division by zero in training/evaluation.
 
-The README's short run uses sizes checked to satisfy these restrictions. It runs four training batches and one evaluation batch on dataset 1, performs eight optimizer steps, and saves one checkpoint.
+The README's short run uses sizes that provide nonempty training and evaluation batches. It runs four training batches and one evaluation batch on dataset 1, performs eight optimizer steps, and saves one checkpoint.
 
 ## Outputs and randomness
 
@@ -50,7 +50,9 @@ The README's short run uses sizes checked to satisfy these restrictions. It runs
 - The final CSV row repeats the best epoch and loss, rather than another epoch; a one-epoch run has two identical rows.
 - Losses in logs are averages of per-sequence final-step RMSEs after inverse scaling; training backpropagates normalized final-step MSE.
 - Existing files at these paths are overwritten; cross-graph experiments reuse checkpoint paths for the same training dataset.
-- The training script does not set seeds and keeps dropout active in evaluation, so numerical logs vary between runs.
+- The training script does not set seeds; initialization and training dropout remain random, so numerical logs vary between runs.
 - The synthetic example sets a seed and disables dropout for its untrained forward check; its shape/finite checks do not require exact floating-point predictions.
 
 The script produces console output, checkpoints, and CSV logs, but no plots or standalone prediction export. See [verification status](limitations.md#verification-status) for what has actually been executed.
+
+[Training regression checks](../tests/integration/training/README.md) exercise exact full batches, two epochs, and evaluation mode using temporary synthetic data.

@@ -88,7 +88,7 @@ class DataLoader():
             
             idx = self.data_pointer_train
             
-            assert idx + self.seq_length_p1 + 1 < self.num_data_train
+            assert idx + self.seq_length_p1 <= self.num_data_train
             
             seq_x = self.dataset_train[idx:idx+self.seq_length_p1]
             
@@ -108,7 +108,7 @@ class DataLoader():
             
             idx = self.data_pointer_eval
             
-            assert idx + self.seq_length_p1 + 1 < self.num_data_eval
+            assert idx + self.seq_length_p1 <= self.num_data_eval
             
             seq_x = self.dataset_eval[idx:idx+self.seq_length_p1]
             

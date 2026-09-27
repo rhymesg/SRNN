@@ -202,6 +202,8 @@ def Run_SRNN_Different_Dataset(args, no_dataset_train, no_dataset_eval):
         epoch = e + 1
         start_train = time.time()
 
+        net.train()
+        dataloader.reset_pointers()
         ####  Training #### 
         print('')
         print('-- Training, epoch {}/{}, Dataset {} on {}'.format(epoch, args.num_epochs, no_dataset_train, no_dataset_eval))
@@ -277,6 +279,7 @@ def Run_SRNN_Different_Dataset(args, no_dataset_train, no_dataset_eval):
         print('')
         
         
+        net.eval()
         #### Evaluation #### 
         print('-- Evaluation, epoch {}/{}, Dataset {} on {}'.format(epoch, args.num_epochs, no_dataset_train, no_dataset_eval))
         
@@ -309,8 +312,9 @@ def Run_SRNN_Different_Dataset(args, no_dataset_train, no_dataset_eval):
                 data_nodes, data_temporalEdges, data_spatialEdges = stgraph.getSequenceData()
 
                 # put a sequence to net
-                _, data_nodes, outputs = forward(net, optimizer, args, stgraph, 
-                                                           data_nodes, data_temporalEdges, data_spatialEdges)
+                with torch.no_grad():
+                    _, data_nodes, outputs = forward(net, optimizer, args, stgraph,
+                                                    data_nodes, data_temporalEdges, data_spatialEdges)
                 
                 loss_batch += loss_RMSE(data_nodes[-1], outputs[-1], dataloader.scaler)
 
@@ -375,6 +379,8 @@ def Run_SRNN_NormalCase(args, no_dataset):
     for e in range(args.num_epochs):
         epoch = e + 1
         
+        net.train()
+        dataloader.reset_pointers()
         ####  Training #### 
         print('-- Training, epoch {}/{}'.format(epoch, args.num_epochs))
         loss_epoch = 0
@@ -433,6 +439,7 @@ def Run_SRNN_NormalCase(args, no_dataset):
             'optimizer_state_dict': optimizer.state_dict()
         }, save_path)           
     
+        net.eval()
         #### Evaluation #### 
         print('-- Evaluation, epoch {}/{}'.format(epoch, args.num_epochs))
         loss_epoch = 0
@@ -455,8 +462,9 @@ def Run_SRNN_NormalCase(args, no_dataset):
                 data_nodes, data_temporalEdges, data_spatialEdges = stgraph.getSequenceData()
 
                 # put a sequence to net
-                _, data_nodes, outputs = forward(net, optimizer, args, stgraph, 
-                                                           data_nodes, data_temporalEdges, data_spatialEdges)
+                with torch.no_grad():
+                    _, data_nodes, outputs = forward(net, optimizer, args, stgraph,
+                                                    data_nodes, data_temporalEdges, data_spatialEdges)
                 
                 loss_batch += loss_RMSE(data_nodes[-1], outputs[-1], dataloader.scaler)
 
