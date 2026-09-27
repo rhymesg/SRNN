@@ -10,6 +10,8 @@ The model combines shared node LSTMs, spatial-edge LSTMs, and temporal-edge LSTM
 
 Use this repository to study shared graph-recurrent architecture or adapt its graph and feature construction.
 
+For adaptation to another language or framework, use the [language-neutral forward procedure and tensor contracts](docs/structural-rnn.md) to connect graph features, recurrent states, and predictions.
+
 ## Method
 
 Represent roads as graph nodes and their spatial and temporal relationships as edges. Shared edge LSTMs encode those relationships; each node LSTM combines the incident-edge states with its own history to predict future speed.
@@ -58,7 +60,7 @@ Install the dependencies used by the source:
 python -m pip install torch numpy pandas
 ```
 
-See [verification status](docs/limitations.md#verification-status) for the checked modern CPU environment; original dependency versions were not recorded.
+See the [checked CPU environment](docs/limitations.md#verification-status) for a concrete dependency reference.
 
 Run the synthetic forward example without using the Santander data or writing model files:
 
@@ -66,7 +68,7 @@ Run the synthetic forward example without using the Santander data or writing mo
 python example_synthetic.py
 ```
 
-It builds a three-node directed chain and checks finite predictions with shape `(3, 3, 1)` from an untrained model. It demonstrates feature construction and the forward path, not prediction accuracy.
+It builds a three-node directed chain and checks finite predictions with shape `(3, 3, 1)` from an untrained model. It demonstrates feature construction and the recurrent forward path.
 
 Run a small one-epoch training/evaluation check on the included dataset 1:
 
@@ -78,7 +80,7 @@ This writes or overwrites `save/dataset_1/srnn_model_epoch1.tar` and `log/_loss_
 
 ## Implementation scope
 
-The source includes graph construction, shared LSTM modules, training, and evaluation. Synthetic forward and training checks exercise those paths; [optimizer, data, and metric differences](docs/limitations.md) matter when comparing results with the papers.
+The source includes graph construction, shared LSTM modules, training, and evaluation. Synthetic forward and training checks exercise those paths; [implementation notes](docs/limitations.md) describe optimizer, data, and metric conventions.
 
 ### Checks
 
@@ -102,4 +104,4 @@ The preliminary work describes the earlier architecture and experiments:
 
 ## License and provenance
 
-The repository includes an [MIT license](LICENSE). See [provenance and limitations](docs/limitations.md) for implementation scope and the [dataset guide](dataset/Santander/README.md) for data-source and processing details.
+The repository includes an [MIT license](LICENSE). See [provenance and implementation notes](docs/limitations.md) for implementation scope and the [dataset guide](dataset/Santander/README.md) for data-source and processing details.
