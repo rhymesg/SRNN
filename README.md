@@ -42,7 +42,7 @@ Install the dependencies used by the source:
 python -m pip install torch numpy pandas
 ```
 
-The original README records Python 3.5 but no dependency versions. See [verification status](docs/limitations.md#verification-status) for the modern CPU environment actually checked; these commands do not reconstruct the original experiment environment.
+The original environment used Python 3.5; dependency versions are unspecified. See [verification status](docs/limitations.md#verification-status) for the modern CPU environment actually checked; these commands do not reconstruct the original experiment environment.
 
 ## Usage
 
@@ -84,14 +84,14 @@ The [structural RNN reference](docs/structural-rnn.md) explains the equations, t
 
 Please cite the journal paper when using this method:
 
-> Youngjoo Kim, Peng Wang, and Lyudmila Mihaylova. “Scalable Learning With a Structural Recurrent Neural Network for Short-Term Traffic Prediction.” *IEEE Sensors Journal*, 19(23), 11359–11366, 2019. [doi:10.1109/JSEN.2019.2933823](https://doi.org/10.1109/JSEN.2019.2933823). [Full text](https://arxiv.org/pdf/2103.02578v1); [original README link](https://www.researchgate.net/publication/335076235_Scalable_Learning_with_a_Structural_Recurrent_Neural_Network_for_Short-Term_Traffic_Prediction).
+> Youngjoo Kim, Peng Wang, and Lyudmila Mihaylova. “Scalable Learning With a Structural Recurrent Neural Network for Short-Term Traffic Prediction.” *IEEE Sensors Journal*, 19(23), 11359–11366, 2019. [doi:10.1109/JSEN.2019.2933823](https://doi.org/10.1109/JSEN.2019.2933823). [Full text](https://arxiv.org/pdf/2103.02578v1); [ResearchGate](https://www.researchgate.net/publication/335076235_Scalable_Learning_with_a_Structural_Recurrent_Neural_Network_for_Short-Term_Traffic_Prediction).
 
 The preliminary work describes the earlier architecture and experiments:
 
-> Youngjoo Kim, Peng Wang, and Lyudmila Mihaylova. “Structural Recurrent Neural Network for Traffic Speed Prediction.” *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)*, 2019. [doi:10.1109/ICASSP.2019.8683670](https://doi.org/10.1109/ICASSP.2019.8683670). [Accepted manuscript](https://eprints.whiterose.ac.uk/id/eprint/142718/1/ICASSP_Kim_Wang_Mihaylova_2019.pdf); [original README link](https://www.researchgate.net/publication/331222757_Structural_Recurrent_Neural_Network_for_Traffic_Speed_Prediction).
+> Youngjoo Kim, Peng Wang, and Lyudmila Mihaylova. “Structural Recurrent Neural Network for Traffic Speed Prediction.” *IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)*, 2019. [doi:10.1109/ICASSP.2019.8683670](https://doi.org/10.1109/ICASSP.2019.8683670). [Accepted manuscript](https://eprints.whiterose.ac.uk/id/eprint/142718/1/ICASSP_Kim_Wang_Mihaylova_2019.pdf); [ResearchGate](https://www.researchgate.net/publication/331222757_Structural_Recurrent_Neural_Network_for_Traffic_Speed_Prediction).
 
 [CITATION.cff](CITATION.cff) contains software metadata, the preferred journal citation, and the preliminary paper reference. The paper citation request is separate from license obligations.
 
 ## License and provenance
 
-The repository includes an [MIT license](LICENSE). See [provenance and limitations](docs/limitations.md) for implementation history and the [dataset guide](dataset/Santander/README.md) for data-source and processing details.
+The repository includes an [MIT license](LICENSE). See [provenance and limitations](docs/limitations.md) for implementation scope and the [dataset guide](dataset/Santander/README.md) for data-source and processing details.
